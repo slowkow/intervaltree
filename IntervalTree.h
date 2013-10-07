@@ -1,6 +1,7 @@
 #ifndef __INTERVAL_TREE_H
 #define __INTERVAL_TREE_H
 
+#include <climits>
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -14,6 +15,11 @@ public:
     K start;
     K stop;
     T value;
+    Interval()
+        : start(0)
+        , stop(INT_MAX)
+        , value("")
+    { }
     Interval(K s, K e, const T& v)
         : start(s)
         , stop(e)
@@ -21,17 +27,17 @@ public:
     { }
 };
 
-template <class T, typename K>
+template <class T, typename K = int>
 int intervalStart(const Interval<T,K>& i) {
     return i.start;
 }
 
-template <class T, typename K>
+template <class T, typename K = int>
 int intervalStop(const Interval<T,K>& i) {
     return i.stop;
 }
 
-template <class T, typename K>
+template <class T, typename K = int>
 ostream& operator<<(ostream& out, Interval<T,K>& i) {
     out << "Interval(" << i.start << ", " << i.stop << "): " << i.value;
     return out;
